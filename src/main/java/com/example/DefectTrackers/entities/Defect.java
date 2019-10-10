@@ -12,6 +12,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
+
 @Entity
 @Table(name = "Defect")
 public class Defect implements Serializable {
@@ -39,9 +45,10 @@ public class Defect implements Serializable {
 	public void setPriority(String priority) {
 		this.priority = priority;
 	}
-
+	@JsonProperty(access = Access.WRITE_ONLY)
 	@ManyToOne(cascade = { CascadeType.MERGE, CascadeType.REMOVE })
 	@JoinColumn(name = "project_id")
+	 @OnDelete(action = OnDeleteAction.CASCADE)
 	private Project project;
 
 	public String getDefect() {

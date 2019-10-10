@@ -15,6 +15,12 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
+
 @Entity
 @Table(name = "module")
 public class Modules implements Serializable {
@@ -27,10 +33,12 @@ public class Modules implements Serializable {
 	@Column(name = "id", updatable = false, nullable = false)
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
+	@JsonProperty(access = Access.WRITE_ONLY)
 	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE })
 	@JoinTable(name = "allocation", joinColumns = {
 			@JoinColumn(name = "module_id", nullable = false) }, inverseJoinColumns = {
 					@JoinColumn(name = "employee_id", nullable = false) })
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	private Set<Employee> employee;
 	private String modelname, modeldesc;
 
