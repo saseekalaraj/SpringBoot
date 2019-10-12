@@ -45,7 +45,7 @@ public class Defect implements Serializable {
 	public void setPriority(String priority) {
 		this.priority = priority;
 	}
-	@JsonProperty(access = Access.WRITE_ONLY)
+
 	@ManyToOne(cascade = { CascadeType.MERGE, CascadeType.REMOVE })
 	@JoinColumn(name = "project_id")
 	 @OnDelete(action = OnDeleteAction.CASCADE)

@@ -31,7 +31,7 @@ public class Employee implements Serializable {
 	@Column(name = "id", updatable = false, nullable = false)
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-	@JsonProperty(access = Access.AUTO)
+	//@JsonProperty(access = Access.WRITE_ONLY)
 	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, fetch = FetchType.LAZY)
 	 @OnDelete(action = OnDeleteAction.CASCADE)
 	private List<Modules> module;

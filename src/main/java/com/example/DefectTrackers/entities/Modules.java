@@ -33,7 +33,7 @@ public class Modules implements Serializable {
 	@Column(name = "id", updatable = false, nullable = false)
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-	@JsonProperty(access = Access.WRITE_ONLY)
+	//@JsonProperty(access = Access.WRITE_ONLY)
 	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE })
 	@JoinTable(name = "allocation", joinColumns = {
 			@JoinColumn(name = "module_id", nullable = false) }, inverseJoinColumns = {
